@@ -1,0 +1,191 @@
+@charset "utf-8";
+
+
+@charset "utf-8";
+
+@import "reset";
+
+html {
+  font: {
+    size: 16px;
+    family: "Arial", "Helvetica", "微軟正黑體", "sans-serif";
+  }
+}
+
+.bg-grey {
+  background-color: #f9f9f9;
+}
+.text-center {
+  text: {
+    align: center;
+  }
+}
+.js{
+  &-btn {
+    color: #666;
+    font: {
+      weight: 600;
+    }
+    &::after{
+      content: '';
+      position: absolute;
+      left: calc(100%);
+      top: 0;
+      border: {
+        right: 3px solid #0077b5;
+      }
+      height: 100%;
+    }
+  }
+  &-hidden {
+    display: none;
+  }
+}
+
+.page {
+  display: flex;
+  flex: {
+    direction: column;
+  }
+  margin: {
+    left: 17px;
+  }
+  &__btn{
+    position: relative;
+    margin: {
+      top: 8px;
+      bottom: 8px;      
+    }
+    border: 0;
+    background: {
+      color: transparent;
+    }
+    cursor: pointer;
+    font: {
+      size: 15px;
+    }
+    color: #888;
+    &:hover{
+      color: #666;
+    }
+  }
+}
+
+.d {
+  &-flex {
+    display: flex;
+  }
+}
+
+.mx {
+  &-auto {
+    margin: {
+      left: auto;
+      right: auto;
+    }
+  }
+}
+
+.main {
+  display: flex;
+  margin: {
+    top: 10px;
+  }
+}
+
+.container {
+  max-width: 900px;
+}
+
+.header {
+  padding: {
+    top: 15px;
+    bottom: 15px;
+  }
+  &__tit {
+    font: {
+      size: 2rem;
+      weight: 600;
+    }
+  }
+}
+.spotTable {
+  &__smBox {
+    position: relative;
+    width: 78px;
+  }
+  &__lgBox {
+    position: absolute;
+    z-index: 1;
+    display: none;
+    width: 300px;
+    padding: 10px;
+    top: 0;
+    left: calc(100% + 16px);
+    background: {
+      color: #fff;
+    }
+    box: {
+      shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    }
+  }
+  &__img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  &__link {
+    color: #0077b5;
+    &:hover {
+      text: {
+        decoration: none;
+      }
+    }
+  }
+  &__smBox:hover {
+    .spotTable{
+      &__lgBox {
+        display: block;
+      }
+    }
+  }
+  &__thead {
+    background: {
+      color: #f8f8f8;
+    }
+    border: {
+      bottom: solid 2px #ccc;
+    }
+  }
+  &__td,&__th {
+    padding: 10px;
+    border: solid 1px #ddd;
+  }
+  &__td {
+    height: 20px;
+  }
+  &__th {
+    color: #707070;
+  }
+  &__tbody:hover {
+    .spotTable {
+      &__tr:hover {
+        background: {
+          color: #EFF4F7;
+        }
+      }
+    }
+  }
+}
+
+.loader {
+  width: 100%;
+  height: 100%;
+  background: {
+    color: rgba(0, 0, 0, 0.7);
+  }
+  &__img {
+    display: block;
+  }
+}
+

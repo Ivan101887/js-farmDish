@@ -62,8 +62,24 @@ html {
   background-color: #f9f9f9;
 }
 
+.text-bolder {
+  font-weight: 600;
+}
+
+.text-grey {
+  color: #A29D9C;
+}
+
 .text-center {
   text-align: center;
+}
+
+.text-nowrap {
+  white-space: nowrap;
+}
+
+.td-md {
+  width: 20%;
 }
 
 .js-btn {
@@ -74,7 +90,7 @@ html {
 .js-btn::after {
   content: '';
   position: absolute;
-  left: calc(100%);
+  left: 100%;
   top: 0;
   border-right: 3px solid #0077b5;
   height: 100%;
@@ -82,32 +98,6 @@ html {
 
 .js-hidden {
   display: none;
-}
-
-.page {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  margin-left: 17px;
-}
-
-.page__btn {
-  position: relative;
-  margin-top: 8px;
-  margin-bottom: 8px;
-  border: 0;
-  background-color: transparent;
-  cursor: pointer;
-  font-size: 15px;
-  color: #888;
-}
-
-.page__btn:hover {
-  color: #666;
 }
 
 .d-flex {
@@ -121,15 +111,15 @@ html {
   margin-right: auto;
 }
 
+.container {
+  max-width: 879px;
+}
+
 .main {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   margin-top: 10px;
-}
-
-.container {
-  max-width: 900px;
 }
 
 .header {
@@ -140,6 +130,10 @@ html {
 .header__tit {
   font-size: 2rem;
   font-weight: 600;
+}
+
+.spotTable {
+  font-size: 15px;
 }
 
 .spotTable__smBox {
@@ -186,10 +180,7 @@ html {
 .spotTable__td, .spotTable__th {
   padding: 10px;
   border: solid 1px #ddd;
-}
-
-.spotTable__td {
-  height: 20px;
+  vertical-align: middle;
 }
 
 .spotTable__th {
@@ -200,7 +191,36 @@ html {
   background-color: #EFF4F7;
 }
 
+.page {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-left: 22px;
+}
+
+.page__btn {
+  position: relative;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 15px;
+  color: #888;
+}
+
+.page__btn:hover {
+  color: #666;
+}
+
 .loader {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);

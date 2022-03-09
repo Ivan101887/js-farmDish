@@ -15,9 +15,27 @@ html {
 .bg-grey {
   background-color: #f9f9f9;
 }
-.text-center {
-  text: {
-    align: center;
+.text {
+  &-bolder {
+    font: {
+      weight: 600;
+    }
+  }
+  &-grey {
+    color: #A29D9C;
+  }
+  &-center {
+    text: {
+      align: center;
+    }
+  }
+  &-nowrap {
+    white-space: nowrap;
+  }
+}
+.td {
+  &-md {
+    width: 20%;
   }
 }
 .js{
@@ -29,7 +47,7 @@ html {
     &::after{
       content: '';
       position: absolute;
-      left: calc(100%);
+      left: 100%;
       top: 0;
       border: {
         right: 3px solid #0077b5;
@@ -42,34 +60,7 @@ html {
   }
 }
 
-.page {
-  display: flex;
-  flex: {
-    direction: column;
-  }
-  margin: {
-    left: 17px;
-  }
-  &__btn{
-    position: relative;
-    margin: {
-      top: 8px;
-      bottom: 8px;      
-    }
-    border: 0;
-    background: {
-      color: transparent;
-    }
-    cursor: pointer;
-    font: {
-      size: 15px;
-    }
-    color: #888;
-    &:hover{
-      color: #666;
-    }
-  }
-}
+
 
 .d {
   &-flex {
@@ -85,6 +76,9 @@ html {
     }
   }
 }
+.container {
+  max-width: 879px;
+}
 
 .main {
   display: flex;
@@ -93,9 +87,6 @@ html {
   }
 }
 
-.container {
-  max-width: 900px;
-}
 
 .header {
   padding: {
@@ -110,6 +101,9 @@ html {
   }
 }
 .spotTable {
+  font: {
+    size: 15px;
+  }
   &__smBox {
     position: relative;
     width: 78px;
@@ -149,6 +143,7 @@ html {
       }
     }
   }
+ 
   &__thead {
     background: {
       color: #f8f8f8;
@@ -160,10 +155,9 @@ html {
   &__td,&__th {
     padding: 10px;
     border: solid 1px #ddd;
+    vertical-align: middle;
   }
-  &__td {
-    height: 20px;
-  }
+ 
   &__th {
     color: #707070;
   }
@@ -178,7 +172,39 @@ html {
   }
 }
 
+.page {
+  display: flex;
+  flex: {
+    direction: column;
+  }
+  margin: {
+    left: 22px;
+  }
+  &__btn{
+    position: relative;
+    margin: {
+      top: 8px;
+      bottom: 8px;      
+    }
+    border: 0;
+    background: {
+      color: transparent;
+    }
+    cursor: pointer;
+    font: {
+      size: 15px;
+    }
+    color: #888;
+    &:hover{
+      color: #666;
+    }
+  }
+}
+
 .loader {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   background: {

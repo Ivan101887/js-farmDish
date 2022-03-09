@@ -9,21 +9,22 @@
 		<meta name="description" content="湖苺宴開在大湖酒莊的4樓，是大湖地區農會經營的田媽媽餐坊">
 		<title>農村地方美食小吃特色料理</title>
 		<link rel="stylesheet" href="styles/index.min.css">
+		<script src="main.js" defer></script>
 	</head>
 
 	<body>
 		<header class="header">
 			<h1 class="header__tit text-center">農村地方美食小吃特色料理</h1>
 		</header>
-		<main class="main container mx-auto">
+		<main class="main mx-auto container">
 			<table class="spotTable">
 				<thead class="spotTable__thead">
-					<tr class="spotTable__tr">
-						<th class="spotTable__th">編號</th>
-						<th class="spotTable__th">行政區</th>
-						<th class="spotTable__th">圖片</th>
-						<th class="spotTable__th">名稱</th>
-						<th class="spotTable__th">介紹</th>
+					<tr class="spotTable__tr text-bolder">
+						<th class="spotTable__th text-nowrap">編號</th>
+						<th class="spotTable__th text-nowrap">行政區</th>
+						<th class="spotTable__th text-nowrap">圖片</th>
+						<th class="spotTable__th td-md text-nowrap">名稱</th>
+						<th class="spotTable__th text-nowrap">介紹</th>
 					</tr>
 				</thead>
 				<tbody class="spotTable__tbody" id="SpotTableTbody"></tbody>
@@ -34,7 +35,6 @@
 		<div class="loader" id="Loading">
 				<img src="./images/load.gif" alt="loading gif" class="loader__img mx-auto" width="200" height="200">
 		</div>
-		<script src="main.js"></script>
 	</body>
 
 </html>

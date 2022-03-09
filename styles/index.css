@@ -58,7 +58,7 @@ html {
   font-family: "Arial", "Helvetica", "微軟正黑體", "sans-serif";
 }
 
-.bg-grey {
+.js-bg__grey {
   background-color: #f9f9f9;
 }
 
@@ -112,7 +112,7 @@ html {
 }
 
 .container {
-  max-width: 879px;
+  max-width: 880px;
 }
 
 .main {
@@ -133,6 +133,7 @@ html {
 }
 
 .spotTable {
+  min-width: 50%;
   font-size: 15px;
 }
 
@@ -144,7 +145,6 @@ html {
 .spotTable__lgBox {
   position: absolute;
   z-index: 1;
-  display: none;
   width: 300px;
   padding: 10px;
   top: 0;
@@ -168,22 +168,24 @@ html {
   text-decoration: none;
 }
 
-.spotTable__smBox:hover .spotTable__lgBox {
-  display: block;
-}
-
 .spotTable__thead {
   background-color: #f8f8f8;
   border-bottom: solid 2px #ccc;
 }
 
 .spotTable__td, .spotTable__th {
-  padding: 10px;
   border: solid 1px #ddd;
   vertical-align: middle;
 }
 
+.spotTable__td {
+  padding: 13px 10px;
+  line-height: 1.25rem;
+}
+
 .spotTable__th {
+  padding: 10px;
+  line-height: 1.25rem;
   color: #707070;
 }
 
@@ -199,13 +201,13 @@ html {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  margin-left: 22px;
+  margin-left: 23px;
 }
 
 .page__btn {
   position: relative;
-  margin-top: 8px;
-  margin-bottom: 8px;
+  margin-top: 6px;
+  margin-bottom: 6px;
   border: 0;
   background-color: transparent;
   cursor: pointer;

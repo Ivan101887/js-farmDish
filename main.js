@@ -10,73 +10,90 @@ setInit();
 async function setInit() {
 	await getData();
 	document.querySelector('#Loading').classList.add('js-hidden');
-	render(0);
+	render();
 	setEvent();
 }
 
 async function getData() {
 	const url = './data/data.json'
-	const res = await fetch(url);
-	const json = await res.json();
-	data = await json;
-	totalLen = data.length
-}
-
-function render(v) {
-	perPage >= totalLen ? elemSpotTableTbody.innerHTML = makeTableStr(v, totalLen) : elemSpotTableTbody.innerHTML = makeTableStr(v, v + perPage);
-	elemPage.innerHTML = makeBtnStr();
-	elemBtn[btnNum].classList.add('js-btn');
-}
-
-function makeTableStr(v, len, str='') {
-	for (let i = v; i < len; i++) {
-		if (data[i]) {
-			const desc = data[i].HostWords
-			str += `
-			${i % 2 !== 0 ? `<tr class="bg-grey spotTable__tr">`
-			:`<tr class="spotTable__tr">`}
-			<td class="text-center text-grey spotTable__td">${i + 1}</td>
-			<td class="spotTable__td  text-nowrap">${data[i].City}</td>
-			<td class="spotTable__td">
-				<div class="spotTable__smBox">
-					<img class="spotTable__img" src=${data[i].PicURL} width="91" height="54">
-					<div class="spotTable__lgBox">
-						<img class="spotTable__img" src=${data[i].PicURL} width="348" height="237">
-					</div>
-				</div>
-			</td>
-			<td class="spotTable__td">
-			${data[i].Url === '' ? `${data[i].Name}` :
-			`<a class="spotTable__link" href=${data[i].Url} target="_blank">${data[i].Name}</a>`}
-			</td>
-			<td class="spotTable__td">
-			${desc.length > 50 ? `${desc.substring(0, 50)}...`
-			: `${desc}`}
-			</td>
-			</tr>`
-		}
+	try {
+		const res = await fetch(url);
+		const json = await res.json();
+		data = await json;
+		totalLen = data.length
+	} catch (e) {
+		console.log('資料擷取失敗')
 	}
+}
+function spiltData(begin) {
+	return data.slice(begin, begin + perPage);
+}
+
+function render() {
+	elemSpotTableTbody.innerHTML = makeTableStr(spiltData(0))
+	elemPage.innerHTML = makeBtnStr();
+	elemBtn[0].classList.add('js-btn');
+}
+
+function makeTableStr(data, str='') {
+	data.forEach((item, index) => {
+		const desc = item.HostWords
+		str += `
+		${index % 2 !== 0 ? `<tr class="spotTable__tr js-bg__grey">`
+		:`<tr class="spotTable__tr">`}
+		<td class="text-center text-grey spotTable__td">${ perPage * btnNum + index +1}</td>
+		<td class="spotTable__td  text-nowrap">${item.City}</td>
+		<td class="spotTable__td">
+			<div class="spotTable__smBox">
+				<img class="spotTable__img" alt=${item.Name} src=${item.PicURL} width="91" height="54">
+			</div>
+		</td>
+		<td class="spotTable__td">
+		${item.Url === ''? `${item.Name}` :
+		`<a class="spotTable__link" href=${item.Url} target="_blank">${item.Name}</a>`}
+		</td>
+		<td class="spotTable__td">
+		${desc.length > 50 ? `${desc.substring(0, 50)}...`
+		: `${desc}`}
+		</td>
+		</tr>`
+	})
 	return str;
 }
 
 function makeBtnStr(str='') {
 	const len = Math.ceil(totalLen / perPage);
 	for (let i = 0; i < len; i++) {
-		str += `<button type="button" class="page__btn" data-i="${i * perPage}">${i + 1}</button>`
+		str += `<button type="button" class="page__btn" data-index="${i * perPage}">${i + 1}</button>`
 	}
 	return str;
 }
 function atClick(e) {
-const self = e.target;
-	const btnIndex = parseInt(self.dataset.i, 10);
-	if (self.nodeName !== 'BUTTON' || btnNum === self.dataset.i) return;
-	elemSpotTableTbody.innerHTML = makeTableStr(btnIndex, btnIndex + perPage);
-	self.classList.add('js-btn');
+	const self = e.target;
+	const btnIndex = parseInt(self.dataset.index, 10);
+	if (self.nodeName !== 'BUTTON' || btnNum === btnIndex / perPage ) return;
 	elemBtn[btnNum].classList.remove('js-btn');
-	btnNum = btnIndex / 10;
-	
+	self.classList.add('js-btn');
+	btnNum = btnIndex / perPage;
+	elemSpotTableTbody.innerHTML = makeTableStr(spiltData(btnNum));
 }
 
-function setEvent(e) {
+function onHovered(e) {
+	const self = e.target;
+	const type = e.type;
+	if (self.nodeName !== 'IMG' || !self.classList.contains('spotTable__img')) return;
+	if (type === 'mouseenter') {
+		const str = `<div class="spotTable__lgBox">
+			<img class="spotTable__img" src=${self.src} alt= ${self.alt} width="348" height="237">
+		</div>`
+		self.parentNode.insertAdjacentHTML('beforeend', str);
+		return;
+	}
+	elemSpotTableTbody.querySelector('.spotTable__lgBox').remove();
+}
+
+function setEvent() {
 	elemPage.addEventListener('click', atClick);
+	elemSpotTableTbody.addEventListener('mouseenter', onHovered, true);
+	elemSpotTableTbody.addEventListener('mouseleave', onHovered, true);
 }

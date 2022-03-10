@@ -21,46 +21,49 @@ async function getData() {
 		const json = await res.json();
 		data = await json;
 		totalLen = data.length
-		// data = 
+		data = setData(data);
+		setData();
 	} catch (e) {
 		console.log('資料擷取失敗')
 	}
 }
-function spiltData(begin) {
-	return data.slice(begin, begin + perPage);
+
+function setData() {
+	let arr = [];
+	data.forEach((item, index) => {
+		if (index % 10 === 0) {
+			arr.push([]);
+			_index = Math.floor(index / perPage);
+		}
+		arr[_index].push(item);
+	})
+	return arr;
 }
 
-// function setData() {
-// data.forEach((item, index) => {
-// 
-// })
-// }
-
 function render() {
-	elemSpotTableTbody.innerHTML = makeTableStr(spiltData(0))
+	elemSpotTableTbody.innerHTML = makeTableStr(0)
 	elemPage.innerHTML = makeBtnStr();
 	elemBtn[0].classList.add('js-btn');
 }
 
-function makeTableStr(data, str = '') {
-	data.forEach((item, index) => {
-		const desc = item.HostWords
+function makeTableStr(i,str = '') {
+	data[i].forEach((item, index) => {
+		const desc = item.HostWords;
 		str += `
 		${index % 2 !== 0 ? `<tr class="spotTable__tr js-bg__grey">` : `<tr class="spotTable__tr">`}
-		<td class="text-center text-grey spotTable__td">${perPage * btnNum + index + 1}</td>
-		<td class="spotTable__td  text-nowrap">${item.City}</td>
-		<div class="spotTable__smBox">
-		<td class="spotTable__td">
-			<div class="spotTable__smBox">
-				<img class="spotTable__img" alt=${item.Name} src=${item.PicURL} width="91" height="54">
-			</div>
-		</td>
-		<td class="spotTable__td">
-		${item.Url === '' ? `${item.Name}` : `<a class="spotTable__link" href=${item.Url} target="_blank">${item.Name}</a>`}
-		</td>
-		<td class="spotTable__td">
-		${desc.length > 50 ? `${desc.substring(0, 50)}...` : `${desc}`}
-		</td>
+			<td class="text-center text-grey spotTable__td">${perPage * btnNum + index + 1}</td>
+			<td class="spotTable__td  text-nowrap">${item.City}</td>
+			<td class="spotTable__td">
+				<div class="spotTable__smBox">
+					<img class="spotTable__img" alt=${item.Name} src=${item.PicURL} width="91" height="54">
+				</div>
+			</td>
+			<td class="spotTable__td">
+				${item.Url === '' ? `${item.Name}` : `<a class="spotTable__link" href=${item.Url} target="_blank">${item.Name}</a>`}
+			</td>
+			<td class="spotTable__td">
+				${desc.length > 50 ? `${desc.substring(0, 50)}...` : `${desc}`}
+			</td>
 		</tr>`
 	})
 	return str;
@@ -80,7 +83,7 @@ function atClick(e) {
 	elemBtn[btnNum].classList.remove('js-btn');
 	self.classList.add('js-btn');
 	btnNum = btnIndex;
-	elemSpotTableTbody.innerHTML = makeTableStr(spiltData(btnNum));
+	elemSpotTableTbody.innerHTML = makeTableStr(btnNum);
 }
 
 function onHovered(e) {
